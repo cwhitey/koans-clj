@@ -14,14 +14,16 @@
       (recur (dec n) (not acc)))))
 
 (defn recursive-reverse [coll]
-  __)
+  (loop [x (vec coll)
+         acc []]
+    (if (= 0 (count x))
+      acc
+      (recur (pop (vec x)) (conj (vec acc) (last (vec x)))))))
 
 (defn factorial [n]
-  (if (= n 0)
-    0
-    ((factorial (- n 1)) (factorial (- n 2)))
-  )
-)
+  (if (<= n 1)
+    1
+    (* n (factorial (dec n)))))
 
 (meditations
   "Recursion ends with a base case"
@@ -34,10 +36,10 @@
   (= false (is-even-bigint? 100003N))
 
   "Reversing directions is easy when you have not gone far"
-  ;(= '(1) (recursive-reverse [1]))
+  (= '(1) (recursive-reverse [1]))
 
   "Yet it becomes more difficult the more steps you take"
-  ;(= '(5 4 3 2 1) (recursive-reverse [1 2 3 4 5]))
+  (= '(5 4 3 2 1) (recursive-reverse [1 2 3 4 5]))
 
   "Simple things may appear simple."
   (= 1 (factorial 1))
@@ -54,5 +56,5 @@
   "You can even deal with very large numbers"
   (< 1000000000000000000000000N (factorial 1000N))
 
-  "But what happens when the machine limits you?"
-  (< 1000000000000000000000000N (factorial 100003N)))
+  #_"But what happens when the machine limits you?"
+  #_(< 1000000000000000000000000N (factorial 100003N)))

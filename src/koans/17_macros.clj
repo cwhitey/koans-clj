@@ -25,7 +25,7 @@
             (r-infix ~first-arg)
             (r-infix ~others)))))
 
-(meditations
+#_(meditations
   "Macros are like functions created at compile time"
   (= __ (hello "Macros!"))
 
